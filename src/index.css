@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; }
+body { background: #5C0A18; }
+
+input[type="text"]:focus { outline: none; }
+input[type="radio"] { accent-color: #FAF6E8; }
+button:hover { opacity: 0.88; transition: opacity 0.2s; }
+
+/* ─────────────────────────────────────────────
+   KEYFRAME DEFINITIONS
+───────────────────────────────────────────── */
+
+/* Hero photo: slow Ken Burns zoom + drift */
+@keyframes kenBurns {
+  0%   { transform: scale(1.0) translate(0%,    0%);   }
+  100% { transform: scale(1.08) translate(-1.5%, 1%); }
+}
+
+/* Generic fades */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-22px); }
+  to   { opacity: 1; transform: translateY(0);     }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.82); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+/* Subtle shimmer on divider lines */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.7;  }
+}
+
+/* Floating flower in footer */
+@keyframes float {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-6px); }
+}
+
+/* Heartbeat on wedding date */
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1);    }
+  14%       { transform: scale(1.06); }
+  28%       { transform: scale(1);    }
+  42%       { transform: scale(1.04); }
+  70%       { transform: scale(1);    }
+}
+
+/* ─────────────────────────────────────────────
+   HERO ANIMATION CLASSES  (auto-play on load)
+───────────────────────────────────────────── */
+.hero-photo {
+  animation: kenBurns 14s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+
+.hero-label {
+  animation: fadeInDown 0.8s ease-out 0.3s both;
+}
+
+.hero-title {
+  animation: fadeInRight 0.85s ease-out 0.65s both;
+}
+
+.hero-names {
+  animation: fadeInUp 0.9s ease-out 1.0s both;
+}
+
+/* ─────────────────────────────────────────────
+   SCROLL-TRIGGERED ANIMATION CLASSES
+   Applied via JS (useInView) by adding .visible
+───────────────────────────────────────────── */
+.anim {
+  opacity: 0;
+}
+.anim.visible {
+  opacity: 1;
+}
+
+.anim-fadeUp       { --anim: fadeInUp;    }
+.anim-fadeDown     { --anim: fadeInDown;  }
+.anim-fadeLeft     { --anim: fadeInLeft;  }
+.anim-fadeRight    { --anim: fadeInRight; }
+.anim-zoomIn       { --anim: zoomIn;      }
+.anim-fadeIn       { --anim: fadeIn;      }
+
+.anim.visible {
+  animation: var(--anim, fadeInUp) 0.7s ease-out var(--delay, 0s) both;
+}
+
+/* Footer flower floats */
+.flower-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Heartbeat on wedding date highlight */
+.heartbeat {
+  display: inline-block;
+  animation: heartbeat 2.5s ease-in-out 2s infinite;
+}
+
+/* Shimmer on decorative divider lines */
+.shimmer-line {
+  animation: shimmer 2.8s ease-in-out infinite;
+}
