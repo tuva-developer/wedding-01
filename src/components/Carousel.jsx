@@ -6,6 +6,8 @@ export function Carousel({ images, height = 400 }) {
   const [dir, setDir]     = useState(1)          // 1 = forward, -1 = backward
   const touchX            = useRef(null)
   const intervalRef       = useRef(null)
+  const TRANSITION_MS     = 1100
+  const TRANSITION_EASE   = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
   /* ── Auto-play ─────────────────────────────────────────────────────── */
   const startTimer = () => {
@@ -23,7 +25,7 @@ export function Carousel({ images, height = 400 }) {
       else next = target
       setDir(next > c || (c === images.length - 1 && next === 0) ? 1 : -1)
       setPrev(c)
-      setTimeout(() => setPrev(null), 900)
+      setTimeout(() => setPrev(null), TRANSITION_MS + 40)
       return next
     })
     startTimer()
@@ -42,19 +44,21 @@ export function Carousel({ images, height = 400 }) {
   const slideStyle = (i) => {
     const isCur  = i === cur
     const isPrev = i === prev
-    if (!isCur && !isPrev) return { opacity: 0, transform: 'scale(0.98)', zIndex: 0, transition: 'none' }
+    if (!isCur && !isPrev) return { opacity: 0, transform: 'scale(0.99)', zIndex: 0, transition: 'none' }
     if (isPrev) return {
       opacity: 0,
-      transform: `translateX(${dir * -6}%) scale(1.02)`,
+      transform: `translateX(${dir * -3}%) scale(1.01)`,
       zIndex: 1,
-      transition: 'opacity 0.85s ease-in-out, transform 0.85s ease-in-out',
+      transition: `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, transform ${TRANSITION_MS}ms ${TRANSITION_EASE}`,
+      willChange: 'opacity, transform',
     }
     // current
     return {
       opacity: 1,
       transform: 'translateX(0) scale(1)',
       zIndex: 2,
-      transition: 'opacity 0.85s ease-in-out, transform 0.85s ease-in-out',
+      transition: `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, transform ${TRANSITION_MS}ms ${TRANSITION_EASE}`,
+      willChange: 'opacity, transform',
       animation: 'kenBurns 12s ease-in-out infinite alternate',
     }
   }
@@ -69,7 +73,7 @@ export function Carousel({ images, height = 400 }) {
       {images.map((src, i) => (
         <div
           key={i}
-          style={{ position: 'absolute', inset: 0, ...slideStyle(i) }}
+          style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', ...slideStyle(i) }}
         >
           <img
             src={src}

@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { FaMusic, FaVolumeMute } from 'react-icons/fa'
 import { useInView } from '@/hooks/useInView'
 import { Carousel } from '@/components/Carousel'
 
@@ -19,6 +20,7 @@ const CAROUSEL_IMGS = [
   '/images/z7561885334313_e94d2df5bd429bb694abe7bbe314d815.jpg',
   '/images/z7561885316340_48da5993cfa978ab0259a13c8ec8e4a4.jpg',
 ]
+const BG_MUSIC = '/audio/bai103.mp3'
 
 /* ─── Wedding data ────────────────────────────────────────────────────────── */
 const GROOM     = 'Văn Mẫn'
@@ -114,10 +116,44 @@ const dividerStyle = (light) => ({
 export default function WeddingPage() {
   const [form, setForm]           = useState({ name: '', attending: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [isMusicOn, setIsMusicOn] = useState(false)
+  const audioRef                  = useRef(null)
+
+  useEffect(() => {
+    const tryStart = async () => {
+      if (!audioRef.current) return
+      try {
+        await audioRef.current.play()
+        setIsMusicOn(true)
+      } catch {
+        setIsMusicOn(false)
+      }
+    }
+
+    tryStart()
+    document.addEventListener('pointerdown', tryStart, { once: true })
+    return () => document.removeEventListener('pointerdown', tryStart)
+  }, [])
+
+  const toggleMusic = async () => {
+    if (!audioRef.current) return
+    if (audioRef.current.paused) {
+      try {
+        await audioRef.current.play()
+        setIsMusicOn(true)
+      } catch {
+        setIsMusicOn(false)
+      }
+      return
+    }
+    audioRef.current.pause()
+    setIsMusicOn(false)
+  }
 
   return (
-    <div style={{ background: '#5C0A18', minHeight: '100vh' }}>
-      <div style={{ maxWidth: 480, margin: '0 auto', overflow: 'hidden' }}>
+    <div style={{ background: '#5C0A18', minHeight: '100vh', width: '100%' }}>
+      <audio ref={audioRef} src={BG_MUSIC} loop preload="auto" />
+      <div style={{ width: '100%', maxWidth: 600, margin: '0 auto', overflow: 'hidden' }}>
 
         {/* ══════════════════════════════════════════════════
             1.  HERO  —  full-width photo + overlay
@@ -140,7 +176,7 @@ export default function WeddingPage() {
 
           {/* "Nhà Gái" — fade in down */}
           <div className="hero-label" style={{ position: 'absolute', top: 28, width: '100%', textAlign: 'center', zIndex: 2 }}>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 9, color: 'rgba(250,246,232,0.62)', letterSpacing: '0.36em', textTransform: 'uppercase', margin: 0 }}>
+            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 16, color: 'rgba(250,246,232,0.62)', letterSpacing: '0.36em', textTransform: 'uppercase', margin: 0 }}>
               Nhà Gái
             </p>
           </div>
@@ -233,7 +269,7 @@ export default function WeddingPage() {
               </p>
             </AnimIn>
             <AnimIn type="fadeUp" delay={0.28}>
-              <p className="heartbeat" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 16, color: '#5C0A18', fontWeight: 600, letterSpacing: '0.15em', margin: '4px 0 2px' }}>
+              <p className="heartbeat" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 30, color: '#5C0A18', fontWeight: 600, letterSpacing: '0.15em', margin: '4px 0 2px' }}>
                 {DATE_SOLAR}
               </p>
               <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: 'rgba(92,10,24,0.5)', letterSpacing: '0.03em', margin: 0 }}>
@@ -270,10 +306,13 @@ export default function WeddingPage() {
                         fontFamily: "'Montserrat', sans-serif",
                         color: isWed ? '#FAF6E8' : '#2C1810',
                         background: isWed ? '#5C0A18' : 'transparent',
-                        borderRadius: isWed ? '50%' : 0,
+                        borderRadius: 0,
+                        clipPath: isWed
+                          ? 'polygon(50% 92%, 10% 58%, 2% 38%, 12% 20%, 28% 16%, 40% 24%, 50% 34%, 60% 24%, 72% 16%, 88% 20%, 98% 38%, 90% 58%)'
+                          : 'none',
                         fontWeight: isWed ? 700 : 400,
-                        width: isWed ? 22 : 'auto',
-                        height: isWed ? 22 : 'auto',
+                        width: isWed ? 24 : 'auto',
+                        height: isWed ? 24 : 'auto',
                         margin: isWed ? 'auto' : 0,
                         visibility: day === 0 ? 'hidden' : 'visible',
                       }}>
@@ -326,7 +365,7 @@ export default function WeddingPage() {
             </AnimIn>
           </div>
           <AnimIn type="fadeIn" delay={0.2}>
-            <Carousel images={CAROUSEL_IMGS} height={420} />
+            <Carousel images={CAROUSEL_IMGS} height={600} />
           </AnimIn>
           <div style={{ height: 32 }} />
         </div>
@@ -334,7 +373,7 @@ export default function WeddingPage() {
         {/* ══════════════════════════════════════════════════
             5.  RSVP  (dark)
         ══════════════════════════════════════════════════ */}
-        <div style={{ background: '#5C0A18', padding: '0 32px 38px', textAlign: 'center', borderTop: '1px solid rgba(250,246,232,0.1)' }}>
+        <div style={{ background: '#5C0A18', padding: '0 32px 38px', textAlign: 'center' }}>
           <AnimIn type="fadeUp">
             <h2 style={titleStyle(true, 20)}>Xác Nhận Tham Dự</h2>
             <div className="shimmer-line" style={dividerStyle(true)} />
@@ -437,6 +476,23 @@ export default function WeddingPage() {
         </div>
 
       </div>
+      <button
+        type="button"
+        onClick={toggleMusic}
+        aria-label={isMusicOn ? 'Tat nhac' : 'Mo nhac'}
+        title={isMusicOn ? 'Tat nhac' : 'Mo nhac'}
+        style={{
+          position: 'fixed', right: 16, bottom: 16, zIndex: 1200,
+          width: 44, height: 44, borderRadius: '50%',
+          border: '1px solid rgba(250,246,232,0.3)',
+          background: 'rgba(92,10,24,0.88)', color: '#FAF6E8',
+          cursor: 'pointer',
+          backdropFilter: 'blur(4px)', padding: 0,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
+      >
+        {isMusicOn ? <FaMusic size={17} /> : <FaVolumeMute size={17} />}
+      </button>
     </div>
   )
 }
