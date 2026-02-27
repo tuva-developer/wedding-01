@@ -303,10 +303,10 @@ export default function WeddingPage() {
             {/* Venue photos — staggered zoom in */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
               <AnimIn type="zoomIn" delay={0.05}>
-                <img src={IMG.venue1} alt="Venue" style={{ width: '100%', height: 104, objectFit: 'cover', borderRadius: 3, display: 'block' }} />
+                <img src={IMG.venue1} alt="Venue" style={{ width: '100%', height: 400, objectFit: 'cover', borderRadius: 3, display: 'block' }} />
               </AnimIn>
               <AnimIn type="zoomIn" delay={0.18}>
-                <img src={IMG.venue2} alt="Venue" style={{ width: '100%', height: 104, objectFit: 'cover', borderRadius: 3, display: 'block' }} />
+                <img src={IMG.venue2} alt="Venue" style={{ width: '100%', height: 400, objectFit: 'cover', borderRadius: 3, display: 'block' }} />
               </AnimIn>
             </div>
           </div>
