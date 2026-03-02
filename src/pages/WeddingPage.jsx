@@ -7,7 +7,7 @@ import { RsvpSection } from '@/components/wedding/sections/RsvpSection'
 import { ThanksSection } from '@/components/wedding/sections/ThanksSection'
 import { ImageLightbox } from '@/components/wedding/ui/ImageLightbox'
 import { MusicToggleButton } from '@/components/wedding/ui/MusicToggleButton'
-import FloatingHearts from '@/components/shared/FloatingHearts'
+import FloatingRosePetals from '@/components/shared/FloatingRosePetals'
 import {
   BG_MUSIC,
   BRIDE,
@@ -118,7 +118,7 @@ export default function WeddingPage({ revealState = 'revealed' }) {
       data-reveal={revealState}
       style={{ background: '#5C0A18', minHeight: '100vh', width: '100%', position: 'relative', overflow: 'hidden' }}
     >
-      <FloatingHearts variant="page" />
+      <FloatingRosePetals variant="page" />
       <audio ref={audioRef} src={BG_MUSIC} loop preload="auto" playsInline />
       <div style={{ width: '100%', maxWidth: 600, margin: '0 auto', overflow: 'hidden', position: 'relative', zIndex: 2 }}>
         <HeroSection image={IMG.hero} bride={BRIDE} groom={GROOM} onOpenImage={openLightbox} />

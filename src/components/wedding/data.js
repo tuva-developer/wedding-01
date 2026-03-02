@@ -15,7 +15,7 @@ export const CAROUSEL_IMGS = [
   '/images/z7561885316340_48da5993cfa978ab0259a13c8ec8e4a4.jpg',
 ]
 
-export const BG_MUSIC = '/audio/bai103.mp3'
+export const BG_MUSIC = '/audio/audio.mp3'
 
 export const GROOM = 'Văn Mẫn'
 export const BRIDE = 'Kiều Anh'

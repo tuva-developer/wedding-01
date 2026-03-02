@@ -90,19 +90,26 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
   }
 }
 
-@keyframes bgHeartRise {
+@keyframes bgPetalFall {
   0% {
-    transform: translate3d(0, 0, 0) scale(0.8);
+    transform: translate3d(0, -12vh, 0) rotate(0deg) scale(0.9);
     opacity: 0;
   }
-  12% {
-    opacity: 0.45;
+  6% {
+    opacity: 0.58;
   }
-  70% {
-    opacity: 0.3;
+  28% {
+    transform: translate3d(var(--petal-drift, 0px), 26vh, 0) rotate(120deg) scale(1);
+  }
+  62% {
+    opacity: 0.46;
+    transform: translate3d(calc(var(--petal-drift, 0px) * -1), 72vh, 0) rotate(255deg) scale(1.06);
+  }
+  88% {
+    opacity: 0.18;
   }
   100% {
-    transform: translate3d(var(--heart-drift, 0px), -120vh, 0) scale(1.1);
+    transform: translate3d(var(--petal-drift, 0px), 115vh, 0) rotate(360deg) scale(1.1);
     opacity: 0;
   }
 }
@@ -248,27 +255,30 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
   will-change: transform, opacity;
 }
 
-.bg-heart {
+.bg-petal {
   position: absolute;
-  bottom: -8%;
-  font-size: var(--heart-size, 14px);
-  line-height: 1;
-  color: rgba(253, 186, 186, 0.72);
-  text-shadow: 0 0 9px rgba(248, 113, 113, 0.36);
-  animation: bgHeartRise var(--heart-duration, 9s) linear var(--heart-delay, 0s) infinite;
+  top: -12%;
+  width: var(--petal-size, 14px);
+  height: calc(var(--petal-size, 14px) * 1.35);
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+  animation: bgPetalFall var(--petal-duration, 9s) linear var(--petal-delay, 0s) infinite;
+  transform-origin: center center;
 }
 
-.bg-heart:nth-child(odd) { --heart-drift: 18px; }
-.bg-heart:nth-child(even) { --heart-drift: -14px; }
+.bg-petal:nth-child(odd) { --petal-drift: 18px; }
+.bg-petal:nth-child(even) { --petal-drift: -14px; }
 
-.bg-heart-gate {
-  color: rgba(254, 202, 202, 0.78);
-  text-shadow: 0 0 10px rgba(248, 113, 113, 0.42);
+.bg-petal-gate {
+  opacity: 0.8;
+  filter: saturate(0.84) brightness(1.08) drop-shadow(0 1px 3px rgba(170, 95, 120, 0.28));
 }
 
-.bg-heart-page {
-  color: rgba(251, 191, 191, 0.26);
-  text-shadow: 0 0 8px rgba(185, 28, 28, 0.18);
+.bg-petal-page {
+  opacity: 0.5;
+  filter: saturate(0.74) brightness(1.05) drop-shadow(0 1px 2px rgba(170, 95, 120, 0.18));
 }
 
 .gate-reveal-flash {

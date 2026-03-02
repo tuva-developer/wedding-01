@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import FloatingHearts from '@/components/shared/FloatingHearts'
+import FloatingRosePetals from '@/components/shared/FloatingRosePetals'
 
 export default function InvitationCard({ onUnlock, onDone }) {
   const [opening, setOpening] = useState(false)
@@ -26,7 +26,7 @@ export default function InvitationCard({ onUnlock, onDone }) {
           opening ? 'gate-reveal-flash is-active' : '',
         ].join(' ')}
       />
-      {!opening && <FloatingHearts variant="gate" />}
+      {!opening && <FloatingRosePetals variant="gate" />}
       <div
         className="absolute aspect-square w-[min(95vw,470px)] rounded-full"
         style={{ '--gate-delay': '0.06s' }}
