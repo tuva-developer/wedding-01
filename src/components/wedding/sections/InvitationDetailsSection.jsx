@@ -20,9 +20,7 @@ export function InvitationDetailsSection({
         </AnimIn>
         <AnimIn type="fadeUp" delay={0.15}>
           <p style={{ fontFamily: "var(--font-script)", fontSize: 24, color: '#3D1A10', margin: '16px 0 10px' }}>
-            Trân trọng kính mời Quý khách đến chung vui trong ngày trọng đại
-            <br />
-            lễ thành hôn của chúng tôi.
+            Trân trọng kính mời Quý khách đến chung vui trong ngày trọng đại lễ thành hôn của chúng tôi.
           </p>
         </AnimIn>
         <AnimIn type="fadeUp" delay={0.28}>
@@ -126,7 +124,7 @@ export function InvitationDetailsSection({
           </a>
         </AnimIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 8 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 16 }}>
           <AnimIn type="zoomIn" delay={0.05}>
             <img
               src={venueImages[0]}

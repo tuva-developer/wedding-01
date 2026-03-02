@@ -15,7 +15,7 @@ export default function InvitationCard({ onUnlock, onDone }) {
     <div
       className={[
         'fixed inset-0 z-[3000] flex items-center justify-center overflow-hidden p-5',
-        'bg-[radial-gradient(circle_at_20%_15%,rgba(252,244,226,0.12),transparent_42%),radial-gradient(circle_at_85%_86%,rgba(252,244,226,0.08),transparent_45%),linear-gradient(145deg,#6b0620_0%,#7b0a27_54%,#5e071d_100%)]',
+        'bg-[#5C0A18]',
         'transition-all duration-[980ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
         opening ? 'pointer-events-none scale-[1.05] opacity-0 blur-[4px] delay-[420ms]' : 'scale-100 opacity-100 blur-0',
       ].join(' ')}
@@ -28,37 +28,37 @@ export default function InvitationCard({ onUnlock, onDone }) {
       />
       {!opening && <FloatingHearts variant="gate" />}
       <div
-        className="absolute aspect-square w-[min(95vw,470px)] rounded-full bg-[radial-gradient(circle,rgba(251,241,218,0.24),transparent_64%)] blur-xl animate-pulse gate-fade-up"
+        className="absolute aspect-square w-[min(95vw,470px)] rounded-full"
         style={{ '--gate-delay': '0.06s' }}
       />
       <div className="relative z-[2] flex w-full max-w-[560px] flex-col items-center gap-8">
         <div
           className={[
-            'pointer-events-none w-full px-6 text-center text-[#f6e9cb] transition-all duration-300 ease-out gate-fade-down',
+            'pointer-events-none w-full px-6 text-center text-white transition-all duration-300 ease-out gate-fade-down',
             opening ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0',
           ].join(' ')}
           style={{ '--gate-delay': '0.14s' }}
         >
           <p
-            className="font-body text-[13px] uppercase tracking-[0.38em] text-[rgba(246,233,203,0.72)] gate-fade-up"
+            className="font-body text-[13px] uppercase tracking-[0.38em] text-[rgba(246,233,203,0.72)] gate-fade-up mb-8"
             style={{ '--gate-delay': '0.22s' }}
           >
             Lễ Thành Hôn
           </p>
           <h2
-            className="mt-8 font-script text-[clamp(32px,9vw,56px)] leading-none gate-fade-up text-left"
+            className="font-script text-[clamp(32px,9vw,56px)] leading-none gate-fade-up text-left"
             style={{ '--gate-delay': '0.32s' }}
           >
             Kiều Anh
           </h2>
           <h2
-            className="-mt-8 font-script text-[clamp(18px,6vw,32px)] leading-none gate-fade-up text-center"
+            className="sm:-mt-4 mt-0 font-script text-[clamp(18px,6vw,32px)] leading-none gate-fade-up text-center"
             style={{ '--gate-delay': '0.32s' }}
           >
             &
           </h2>
           <h2
-            className="-mt-8 font-script text-[clamp(32px,9vw,56px)] leading-none gate-fade-up text-right"
+            className="sm:-mt-4 mt-0 font-script text-[clamp(32px,9vw,56px)] leading-none gate-fade-up text-right"
             style={{ '--gate-delay': '0.32s' }}
           >
             Văn Mẫn
