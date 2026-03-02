@@ -1,4 +1,4 @@
-import { FaMusic, FaVolumeMute } from 'react-icons/fa'
+﻿import { FaMusic, FaVolumeMute } from 'react-icons/fa'
 
 export function MusicToggleButton({ isMusicOn, onToggle }) {
   return (
@@ -31,3 +31,4 @@ export function MusicToggleButton({ isMusicOn, onToggle }) {
     </button>
   )
 }
+

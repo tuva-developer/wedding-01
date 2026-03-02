@@ -1,4 +1,4 @@
-import { useInView } from '@/hooks/useInView'
+﻿import { useInView } from '@/hooks/useInView'
 
 function animCls(type, visible) {
   const base = `anim anim-${type}`
@@ -49,7 +49,7 @@ export function TornDivider({ fromColor, toColor }) {
 }
 
 export const titleStyle = (light, size = 22) => ({
-  fontFamily: "'Cormorant Garamond', Georgia, serif",
+  fontFamily: "var(--font-display)",
   fontSize: size,
   fontWeight: 400,
   letterSpacing: '0.22em',
@@ -65,3 +65,4 @@ export const dividerStyle = (light) => ({
   margin: '10px auto 0',
   background: light ? 'rgba(250,246,232,0.35)' : 'rgba(92,10,24,0.3)',
 })
+

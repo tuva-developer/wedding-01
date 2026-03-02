@@ -1,4 +1,4 @@
-export function ImageLightbox({ items, index, onClose, onPrev, onNext }) {
+﻿export function ImageLightbox({ items, index, onClose, onPrev, onNext }) {
   if (!items?.length || index < 0) return null
   const src = items[index]
   const canNavigate = items.length > 1
@@ -117,3 +117,4 @@ export function ImageLightbox({ items, index, onClose, onPrev, onNext }) {
     </div>
   )
 }
+

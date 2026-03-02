@@ -1,4 +1,4 @@
-export const IMG = {
+﻿export const IMG = {
   hero: '/images/z7561870190071_5e6e98404ee3fad9b2cb59f714806a16.jpg',
   venue1: '/images/z7561885287882_b977f479c3d8145c3729fc060f945426.jpg',
   venue2: '/images/z7561885297161_d70cf8646744884ddeab49ac3a1dc342.jpg',
@@ -40,3 +40,4 @@ export const CAL_WEEKS = [
 ]
 
 export const WEDDING_DAY = 27
+

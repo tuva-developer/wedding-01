@@ -174,7 +174,7 @@ export function Carousel({ images, height = 400, onImageClick }) {
       
       <div style={{
         position: 'absolute', top: 13, right: 16, zIndex: 10,
-        fontFamily: "'Montserrat', sans-serif", fontSize: 9,
+        fontFamily: "var(--font-body)", fontSize: 9,
         color: 'rgba(250,246,232,0.5)', letterSpacing: '0.1em',
       }}>
         {String(cur + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
@@ -182,4 +182,5 @@ export function Carousel({ images, height = 400, onImageClick }) {
     </div>
   )
 }
+
 

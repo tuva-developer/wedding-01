@@ -1,4 +1,4 @@
-import { Carousel } from '@/components/shared/Carousel'
+﻿import { Carousel } from '@/components/shared/Carousel'
 import { AnimIn, dividerStyle, titleStyle } from '@/components/wedding/shared'
 
 export function GallerySection({ images, onOpenImage }) {
@@ -21,3 +21,4 @@ export function GallerySection({ images, onOpenImage }) {
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-import { AnimIn, dividerStyle, titleStyle } from '@/components/wedding/shared'
+﻿import { AnimIn, dividerStyle, titleStyle } from '@/components/wedding/shared'
 
 export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
   return (
@@ -11,8 +11,8 @@ export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
       {submitted ? (
         <AnimIn type="zoomIn" delay={0.05}>
           <div style={{ marginTop: 26 }}>
-            <p style={{ fontFamily: "'Great Vibes', cursive", fontSize: 30, color: '#FAF6E8' }}>Cảm ơn bạn!</p>
-            <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 11, color: 'rgba(250,246,232,0.52)', marginTop: 6 }}>
+            <p style={{ fontFamily: "var(--font-script)", fontSize: 30, color: '#FAF6E8' }}>Cảm ơn bạn!</p>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 11, color: 'rgba(250,246,232,0.52)', marginTop: 6 }}>
               Hẹn gặp lại trong ngày vui.
             </p>
           </div>
@@ -20,7 +20,7 @@ export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
       ) : (
         <AnimIn type="fadeUp" delay={0.15} style={{ textAlign: 'left' }}>
           <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true) }} style={{ marginTop: 22 }}>
-            <p style={{ fontFamily: "'Great Vibes', cursive", fontSize: 20, color: 'rgba(250,246,232,0.56)', marginBottom: 18, textAlign: 'center' }}>
+            <p style={{ fontFamily: "var(--font-script)", fontSize: 20, color: 'rgba(250,246,232,0.56)', marginBottom: 18, textAlign: 'center' }}>
               Hãy xác nhận sự có mặt của bạn để chúng mình
               <br />
               chuẩn bị đón tiếp một cách chu đáo nhất.
@@ -43,7 +43,7 @@ export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
                 fontSize: 13,
                 padding: '7px 0',
                 outline: 'none',
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "var(--font-body)",
                 marginBottom: 18,
                 transition: 'border-color 0.25s',
               }}
@@ -64,7 +64,7 @@ export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
                     onChange={(e) => setForm((f) => ({ ...f, attending: e.target.value }))}
                     style={{ accentColor: '#FAF6E8', width: 14, height: 14, flexShrink: 0 }}
                   />
-                  <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: 'rgba(250,246,232,0.76)' }}>
+                  <span style={{ fontFamily: "var(--font-body)", fontSize: 13, color: 'rgba(250,246,232,0.76)' }}>
                     {opt.label}
                   </span>
                 </label>
@@ -81,7 +81,7 @@ export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
                 letterSpacing: '0.24em',
                 textTransform: 'uppercase',
                 fontWeight: 600,
-                fontFamily: "'Montserrat', sans-serif",
+                fontFamily: "var(--font-body)",
                 padding: '11px 0',
                 border: 'none',
                 borderRadius: 3,
@@ -99,3 +99,4 @@ export function RsvpSection({ form, submitted, setSubmitted, setForm }) {
     </div>
   )
 }
+

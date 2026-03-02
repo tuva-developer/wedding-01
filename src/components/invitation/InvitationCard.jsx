@@ -1,4 +1,5 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
+import FloatingHearts from '@/components/shared/FloatingHearts'
 
 export default function InvitationCard({ onUnlock, onDone }) {
   const [opening, setOpening] = useState(false)
@@ -25,6 +26,7 @@ export default function InvitationCard({ onUnlock, onDone }) {
           opening ? 'gate-reveal-flash is-active' : '',
         ].join(' ')}
       />
+      {!opening && <FloatingHearts variant="gate" />}
       <div
         className="absolute aspect-square w-[min(95vw,470px)] rounded-full bg-[radial-gradient(circle,rgba(251,241,218,0.24),transparent_64%)] blur-xl animate-pulse gate-fade-up"
         style={{ '--gate-delay': '0.06s' }}
@@ -50,13 +52,13 @@ export default function InvitationCard({ onUnlock, onDone }) {
             Kiều Anh
           </h2>
           <h2
-            className="-mt-10 font-script text-[clamp(18px,9vw,40px)] leading-none gate-fade-up text-center"
+            className="-mt-8 font-script text-[clamp(18px,6vw,32px)] leading-none gate-fade-up text-center"
             style={{ '--gate-delay': '0.32s' }}
           >
             &
           </h2>
           <h2
-            className="-mt-10 font-script text-[clamp(32px,9vw,56px)] leading-none gate-fade-up text-right"
+            className="-mt-8 font-script text-[clamp(32px,9vw,56px)] leading-none gate-fade-up text-right"
             style={{ '--gate-delay': '0.32s' }}
           >
             Văn Mẫn
@@ -98,7 +100,7 @@ export default function InvitationCard({ onUnlock, onDone }) {
                 src="/images/wax_seal.png"
                 alt="Wax seal"
                 className={[
-                  'block h-full w-full object-contain drop-shadow-[0_10px_14px_rgba(0,0,0,0.35)]',
+                  'relative z-[2] block h-full w-full object-contain drop-shadow-[0_10px_14px_rgba(0,0,0,0.35)] transition-[filter,transform] duration-300 ease-out hover:scale-[1.02] hover:brightness-105 hover:drop-shadow-[0_0_12px_rgba(248,113,113,0.7)] hover:[filter:drop-shadow(0_0_12px_rgba(248,113,113,0.75))_drop-shadow(0_0_26px_rgba(239,68,68,0.55))]',
                   opening ? '' : 'wax-blink',
                 ].join(' ')}
               />
@@ -109,3 +111,4 @@ export default function InvitationCard({ onUnlock, onDone }) {
     </div>
   )
 }
+

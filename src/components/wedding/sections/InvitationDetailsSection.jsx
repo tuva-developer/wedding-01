@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt } from 'react-icons/fa'
+﻿import { FaMapMarkerAlt } from 'react-icons/fa'
 import { AnimIn, dividerStyle, titleStyle } from '@/components/wedding/shared'
 
 export function InvitationDetailsSection({
@@ -19,17 +19,17 @@ export function InvitationDetailsSection({
           <div className="shimmer-line" style={dividerStyle(false)} />
         </AnimIn>
         <AnimIn type="fadeUp" delay={0.15}>
-          <p style={{ fontFamily: "'Great Vibes', cursive", fontSize: 24, color: '#3D1A10', margin: '16px 0 10px' }}>
+          <p style={{ fontFamily: "var(--font-script)", fontSize: 24, color: '#3D1A10', margin: '16px 0 10px' }}>
             Trân trọng kính mời Quý khách đến chung vui trong ngày trọng đại
             <br />
-            Lễ thành hôn của chúng tôi.
+            lễ thành hôn của chúng tôi.
           </p>
         </AnimIn>
         <AnimIn type="fadeUp" delay={0.28}>
-          <p className="heartbeat" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 40, color: '#5C0A18', fontWeight: 600, letterSpacing: '0.15em', margin: '4px 0 2px' }}>
+          <p className="heartbeat" style={{ fontFamily: "var(--font-display)", fontSize: 40, color: '#5C0A18', fontWeight: 600, letterSpacing: '0.15em', margin: '4px 0 2px' }}>
             {dateSolar}
           </p>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 13, color: 'rgba(92,10,24,0.7)', letterSpacing: '0.03em', margin: 0 }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: 13, color: 'rgba(92,10,24,0.7)', letterSpacing: '0.03em', margin: 0 }}>
             {dateLunar}
           </p>
         </AnimIn>
@@ -37,14 +37,14 @@ export function InvitationDetailsSection({
 
       <AnimIn type="zoomIn" delay={0.1} style={{ padding: '4px 32px 26px' }}>
         <div style={{ background: '#5C0A18', padding: '7px 0', textAlign: 'center' }}>
-          <span style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 9, color: '#FAF6E8', letterSpacing: '0.22em', textTransform: 'uppercase' }}>
+          <span style={{ fontFamily: "var(--font-body)", fontSize: 9, color: '#FAF6E8', letterSpacing: '0.22em', textTransform: 'uppercase' }}>
             Tháng 3 — 2026
           </span>
         </div>
         <div style={{ background: '#EFE5CA', padding: '9px 6px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', marginBottom: 5 }}>
             {['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'].map((d) => (
-              <div key={d} style={{ textAlign: 'center', fontSize: 9, color: '#5C0A18', fontWeight: 600, fontFamily: "'Montserrat', sans-serif" }}>
+              <div key={d} style={{ textAlign: 'center', fontSize: 9, color: '#5C0A18', fontWeight: 600, fontFamily: "var(--font-body)" }}>
                 {d}
               </div>
             ))}
@@ -62,7 +62,7 @@ export function InvitationDetailsSection({
                       justifyContent: 'center',
                       fontSize: 10,
                       padding: '3px 0',
-                      fontFamily: "'Montserrat', sans-serif",
+                      fontFamily: "var(--font-body)",
                       color: isWedding ? '#FAF6E8' : '#2C1810',
                       background: isWedding ? '#5C0A18' : 'transparent',
                       borderRadius: 0,
@@ -91,10 +91,10 @@ export function InvitationDetailsSection({
           <div className="shimmer-line" style={dividerStyle(false)} />
         </AnimIn>
         <AnimIn type="fadeUp" delay={0.12}>
-          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 12.5, color: '#3D1A10', lineHeight: 1.7, margin: '14px 0 5px' }}>
+          <p style={{ fontFamily: "var(--font-body)", fontSize: 12.5, color: '#3D1A10', lineHeight: 1.7, margin: '14px 0 5px' }}>
             Chúng tôi mong được đón tiếp Quý khách tại:
           </p>
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 17, color: '#5C0A18', fontWeight: 600, lineHeight: 1.5, letterSpacing: '0.06em', margin: '4px 0 18px' }}>
+          <p style={{ fontFamily: "var(--font-display)", fontSize: 17, color: '#5C0A18', fontWeight: 600, lineHeight: 1.5, letterSpacing: '0.06em', margin: '4px 0 18px' }}>
             {venue}
           </p>
           <a
@@ -113,7 +113,7 @@ export function InvitationDetailsSection({
               background: '#5C0A18',
               color: '#FAF6E8',
               textDecoration: 'none',
-              fontFamily: "'Montserrat', sans-serif",
+              fontFamily: "var(--font-body)",
               fontSize: 11,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
@@ -148,3 +148,4 @@ export function InvitationDetailsSection({
     </div>
   )
 }
+

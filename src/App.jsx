@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from 'react'
+﻿import { useLayoutEffect, useState } from 'react'
 import InvitationCard from './components/invitation/InvitationCard'
 import WeddingPage from './pages/WeddingPage'
 
@@ -41,3 +41,4 @@ export default function App() {
     </>
   )
 }
+

@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --font-body: 'Montserrat', sans-serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body, #root { height: 100%; width: 100%; }
 #root { margin: 0; padding: 0; }
-body { background: #5C0A18; }
+body {
+  background: #5C0A18;
+  font-family: var(--font-body);
+}
 
 input[type="text"]:focus { outline: none; }
 input[type="radio"] { accent-color: #FAF6E8; }
@@ -81,12 +90,22 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
   }
 }
 
-@keyframes waxBlink {
-  0%, 100% { opacity: 1; filter: drop-shadow(0 10px 14px rgba(0,0,0,0.35)) brightness(1); transform: scale(1); }
-  45% { opacity: 0.86; filter: drop-shadow(0 11px 16px rgba(0,0,0,0.38)) brightness(1.08); transform: scale(1.03); }
-  60% { opacity: 0.92; filter: drop-shadow(0 10px 14px rgba(0,0,0,0.35)) brightness(0.95); transform: scale(0.99); }
+@keyframes bgHeartRise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.45;
+  }
+  70% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(var(--heart-drift, 0px), -120vh, 0) scale(1.1);
+    opacity: 0;
+  }
 }
-
 
 @keyframes shimmer {
   0%, 100% { opacity: 0.25; }
@@ -101,13 +120,11 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
 
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1);    }
-  14%       { transform: scale(1.06); }
-  28%       { transform: scale(1);    }
-  42%       { transform: scale(1.04); }
-  70%       { transform: scale(1);    }
+  0%, 100% { opacity: 0.98; transform: translateY(0) scale(0.9) rotate(0deg); }
+  25% { opacity: 0.94; transform: translateY(0) scale(1) rotate(0deg); }
+  50% { opacity: 0.9; transform: translateY(0) scale(1.1) rotate(0deg); }
+  75% { opacity: 0.95; transform: translateY(0) scale(1) rotate(0deg); }
 }
-
 
 .hero-photo {
   animation: kenBurns 14s ease-in-out infinite alternate;
@@ -198,8 +215,10 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
 
 
 .heartbeat {
-  display: inline-block;
-  animation: heartbeat 2.5s ease-in-out 2s infinite;
+  animation: heartbeat 1.2s linear 0.1s infinite;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 
@@ -223,8 +242,33 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
 }
 
 .wax-blink {
-  animation: waxBlink 1.9s ease-in-out 0.95s infinite;
-  will-change: transform, opacity, filter;
+  animation: heartbeat 1.2s linear 0.1s infinite;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.bg-heart {
+  position: absolute;
+  bottom: -8%;
+  font-size: var(--heart-size, 14px);
+  line-height: 1;
+  color: rgba(253, 186, 186, 0.72);
+  text-shadow: 0 0 9px rgba(248, 113, 113, 0.36);
+  animation: bgHeartRise var(--heart-duration, 9s) linear var(--heart-delay, 0s) infinite;
+}
+
+.bg-heart:nth-child(odd) { --heart-drift: 18px; }
+.bg-heart:nth-child(even) { --heart-drift: -14px; }
+
+.bg-heart-gate {
+  color: rgba(254, 202, 202, 0.78);
+  text-shadow: 0 0 10px rgba(248, 113, 113, 0.42);
+}
+
+.bg-heart-page {
+  color: rgba(251, 191, 191, 0.26);
+  text-shadow: 0 0 8px rgba(185, 28, 28, 0.18);
 }
 
 .gate-reveal-flash {
@@ -245,5 +289,3 @@ button:hover { opacity: 0.88; transition: opacity 0.2s; }
 .gate-card-light.is-active {
   animation: lightSweep 0.88s cubic-bezier(0.3, 0, 0.15, 1) 0.05s both;
 }
-
-

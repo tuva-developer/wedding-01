@@ -1,4 +1,4 @@
-import { Flower, titleStyle } from '@/components/wedding/shared'
+﻿import { Flower, titleStyle } from '@/components/wedding/shared'
 
 export function HeroSection({ image, bride, groom, onOpenImage }) {
   return (
@@ -28,16 +28,17 @@ export function HeroSection({ image, bride, groom, onOpenImage }) {
         </h1>
       </div>
       <div className="hero-names" style={{ position: 'absolute', bottom: 32, left: 28, zIndex: 2 }}>
-        <p style={{ fontFamily: "'Great Vibes', cursive", fontSize: 42, color: '#FAF6E8', lineHeight: 1, margin: 0, textShadow: '0 2px 12px rgba(0,0,0,0.45)' }}>
+        <p style={{ fontFamily: "var(--font-script)", fontSize: 42, color: '#FAF6E8', lineHeight: 1, margin: 0, textShadow: '0 2px 12px rgba(0,0,0,0.45)' }}>
           {bride}
         </p>
-        <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 10, color: 'rgba(250,246,232,0.62)', letterSpacing: '0.55em', textTransform: 'uppercase', margin: '7px 0' }}>
-          &amp;
+        <p style={{ fontFamily: "var(--font-script)", fontSize: 24, color: '#FAF6E8', textTransform: 'uppercase', margin: '7px 0', textAlign: 'center' }}>
+          &
         </p>
-        <p style={{ fontFamily: "'Great Vibes', cursive", fontSize: 42, color: '#FAF6E8', lineHeight: 1, margin: 0, textShadow: '0 2px 12px rgba(0,0,0,0.45)' }}>
+        <p style={{ fontFamily: "var(--font-script)", fontSize: 42, color: '#FAF6E8', lineHeight: 1, margin: 0, textShadow: '0 2px 12px rgba(0,0,0,0.45)' }}>
           {groom}
         </p>
       </div>
     </div>
   )
 }
+

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { GallerySection } from '@/components/wedding/sections/GallerySection'
 import { HeroSection } from '@/components/wedding/sections/HeroSection'
 import { InvitationDetailsSection } from '@/components/wedding/sections/InvitationDetailsSection'
@@ -7,6 +7,7 @@ import { RsvpSection } from '@/components/wedding/sections/RsvpSection'
 import { ThanksSection } from '@/components/wedding/sections/ThanksSection'
 import { ImageLightbox } from '@/components/wedding/ui/ImageLightbox'
 import { MusicToggleButton } from '@/components/wedding/ui/MusicToggleButton'
+import FloatingHearts from '@/components/shared/FloatingHearts'
 import {
   BG_MUSIC,
   BRIDE,
@@ -34,21 +35,6 @@ export default function WeddingPage({ revealState = 'revealed' }) {
     const audio = audioRef.current
     if (!audio) return
 
-    const tryStart = async () => {
-      try {
-        audio.muted = false
-        await audio.play()
-        setIsMusicOn(true)
-      } catch {
-        try {
-          audio.muted = true
-          await audio.play()
-        } catch {
-        }
-        setIsMusicOn(false)
-      }
-    }
-
     const enableSound = async () => {
       audio.muted = false
       if (!audio.paused) {
@@ -63,11 +49,8 @@ export default function WeddingPage({ revealState = 'revealed' }) {
       }
     }
 
-    tryStart()
-    document.addEventListener('pointerdown', enableSound, { once: true })
     window.addEventListener('wedding:unlock-audio', enableSound)
     return () => {
-      document.removeEventListener('pointerdown', enableSound)
       window.removeEventListener('wedding:unlock-audio', enableSound)
     }
   }, [])
@@ -133,10 +116,11 @@ export default function WeddingPage({ revealState = 'revealed' }) {
     <div
       className="wedding-page-root"
       data-reveal={revealState}
-      style={{ background: '#5C0A18', minHeight: '100vh', width: '100%' }}
+      style={{ background: '#5C0A18', minHeight: '100vh', width: '100%', position: 'relative', overflow: 'hidden' }}
     >
+      <FloatingHearts variant="page" />
       <audio ref={audioRef} src={BG_MUSIC} loop preload="auto" playsInline />
-      <div style={{ width: '100%', maxWidth: 600, margin: '0 auto', overflow: 'hidden' }}>
+      <div style={{ width: '100%', maxWidth: 600, margin: '0 auto', overflow: 'hidden', position: 'relative', zIndex: 2 }}>
         <HeroSection image={IMG.hero} bride={BRIDE} groom={GROOM} onOpenImage={openLightbox} />
         <ProgramSection program={PROGRAM} />
         <TornDivider fromColor="#5C0A18" toColor="#FAF6E8" />
@@ -171,3 +155,4 @@ export default function WeddingPage({ revealState = 'revealed' }) {
     </div>
   )
 }
+
