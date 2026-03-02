@@ -1,6 +1,6 @@
-import { useState, useEffect, useRef } from 'react'
+﻿import { useState, useEffect, useRef } from 'react'
 
-export function Carousel({ images, height = 400 }) {
+export function Carousel({ images, height = 400, onImageClick }) {
   const [cur, setCur]     = useState(0)
   const [prev, setPrev]   = useState(null)
   const [dir, setDir]     = useState(1)          // 1 = forward, -1 = backward
@@ -9,14 +9,14 @@ export function Carousel({ images, height = 400 }) {
   const TRANSITION_MS     = 1100
   const TRANSITION_EASE   = 'cubic-bezier(0.22, 1, 0.36, 1)'
 
-  /* ── Auto-play ─────────────────────────────────────────────────────── */
+  
   const startTimer = () => {
     clearInterval(intervalRef.current)
     intervalRef.current = setInterval(() => goTo('next'), 4200)
   }
   useEffect(() => { startTimer(); return () => clearInterval(intervalRef.current) }, [images.length])
 
-  /* ── Navigation ─────────────────────────────────────────────────────── */
+  
   const goTo = (target) => {
     setCur(c => {
       let next
@@ -31,7 +31,7 @@ export function Carousel({ images, height = 400 }) {
     startTimer()
   }
 
-  /* ── Touch swipe ─────────────────────────────────────────────────────── */
+  
   const onTouchStart = (e) => { touchX.current = e.touches[0].clientX }
   const onTouchEnd   = (e) => {
     if (touchX.current === null) return
@@ -40,7 +40,7 @@ export function Carousel({ images, height = 400 }) {
     touchX.current = null
   }
 
-  /* ── Slide enter/exit transforms ────────────────────────────────────── */
+  
   const slideStyle = (i) => {
     const isCur  = i === cur
     const isPrev = i === prev
@@ -52,7 +52,6 @@ export function Carousel({ images, height = 400 }) {
       transition: `opacity ${TRANSITION_MS}ms ${TRANSITION_EASE}, transform ${TRANSITION_MS}ms ${TRANSITION_EASE}`,
       willChange: 'opacity, transform',
     }
-    // current
     return {
       opacity: 1,
       transform: 'translateX(0) scale(1)',
@@ -69,7 +68,7 @@ export function Carousel({ images, height = 400 }) {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* ── Slides ── */}
+      
       {images.map((src, i) => (
         <div
           key={i}
@@ -77,10 +76,18 @@ export function Carousel({ images, height = 400 }) {
         >
           <img
             src={src}
-            alt=""
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', display: 'block' }}
+            alt={`Carousel image ${i + 1}`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center top',
+              display: 'block',
+              cursor: onImageClick ? 'zoom-in' : 'default',
+            }}
+            onClick={() => onImageClick?.(src, i, images)}
           />
-          {/* Vignette */}
+          
           <div style={{
             position: 'absolute', inset: 0,
             background: 'radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.32) 100%)',
@@ -89,21 +96,21 @@ export function Carousel({ images, height = 400 }) {
         </div>
       ))}
 
-      {/* ── Top gradient scrim ── */}
+      
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: 60, zIndex: 5,
         background: 'linear-gradient(to bottom, rgba(92,10,24,0.55) 0%, transparent 100%)',
         pointerEvents: 'none',
       }} />
 
-      {/* ── Bottom gradient scrim ── */}
+      
       <div style={{
         position: 'absolute', bottom: 0, left: 0, right: 0, height: 70, zIndex: 5,
         background: 'linear-gradient(to top, rgba(92,10,24,0.7) 0%, transparent 100%)',
         pointerEvents: 'none',
       }} />
 
-      {/* ── Prev arrow ── */}
+      
       <button
         onClick={() => goTo('prev')}
         aria-label="Previous"
@@ -112,15 +119,18 @@ export function Carousel({ images, height = 400 }) {
           zIndex: 10, width: 34, height: 34, borderRadius: '50%',
           background: 'rgba(250,246,232,0.12)', border: '1px solid rgba(250,246,232,0.25)',
           color: '#FAF6E8', fontSize: 20, cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
           backdropFilter: 'blur(4px)', transition: 'background 0.2s',
-          paddingBottom: 1,
+          lineHeight: 0,
+          padding: 0,
         }}
         onMouseEnter={e => e.currentTarget.style.background = 'rgba(250,246,232,0.28)'}
         onMouseLeave={e => e.currentTarget.style.background = 'rgba(250,246,232,0.12)'}
-      >‹</button>
+      >
+        <span style={{ display: 'block', transform: 'translateY(-1px)' }}>‹</span>
+      </button>
 
-      {/* ── Next arrow ── */}
+      
       <button
         onClick={() => goTo('next')}
         aria-label="Next"
@@ -129,15 +139,18 @@ export function Carousel({ images, height = 400 }) {
           zIndex: 10, width: 34, height: 34, borderRadius: '50%',
           background: 'rgba(250,246,232,0.12)', border: '1px solid rgba(250,246,232,0.25)',
           color: '#FAF6E8', fontSize: 20, cursor: 'pointer',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
           backdropFilter: 'blur(4px)', transition: 'background 0.2s',
-          paddingBottom: 1,
+          lineHeight: 0,
+          padding: 0,
         }}
         onMouseEnter={e => e.currentTarget.style.background = 'rgba(250,246,232,0.28)'}
         onMouseLeave={e => e.currentTarget.style.background = 'rgba(250,246,232,0.12)'}
-      >›</button>
+      >
+        <span style={{ display: 'block', transform: 'translateY(-1px)' }}>›</span>
+      </button>
 
-      {/* ── Dot indicators ── */}
+      
       <div style={{
         position: 'absolute', bottom: 14, width: '100%',
         display: 'flex', justifyContent: 'center', gap: 7, zIndex: 10,
@@ -158,7 +171,7 @@ export function Carousel({ images, height = 400 }) {
         ))}
       </div>
 
-      {/* ── Counter ── */}
+      
       <div style={{
         position: 'absolute', top: 13, right: 16, zIndex: 10,
         fontFamily: "'Montserrat', sans-serif", fontSize: 9,
@@ -169,3 +182,4 @@ export function Carousel({ images, height = 400 }) {
     </div>
   )
 }
+

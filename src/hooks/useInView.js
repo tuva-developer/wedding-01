@@ -1,9 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 
-/**
- * Returns [ref, isVisible].
- * Once the element enters the viewport, isVisible becomes true (fires once).
- */
+
 export function useInView(threshold = 0.18) {
   const ref     = useRef(null)
   const [visible, setVisible] = useState(false)
@@ -27,3 +24,4 @@ export function useInView(threshold = 0.18) {
 
   return [ref, visible]
 }
+
