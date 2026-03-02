@@ -70,7 +70,14 @@ export function Carousel({ images, height = 400, onImageClick }) {
 
   return (
     <div
-      style={{ position: 'relative', height, overflow: 'hidden', background: '#1a0a0e', userSelect: 'none' }}
+      style={{
+        position: 'relative',
+        height,
+        overflow: 'hidden',
+        background: '#1a0a0e',
+        userSelect: 'none',
+        cursor: onImageClick ? 'pointer' : 'default',
+      }}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onMouseEnter={() => setHovered(true)}
