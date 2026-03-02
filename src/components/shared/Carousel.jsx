@@ -3,6 +3,7 @@
 export function Carousel({ images, height = 400, onImageClick }) {
   const [cur, setCur]     = useState(0)
   const [prev, setPrev]   = useState(null)
+  const [hovered, setHovered] = useState(false)
   const [dir, setDir]     = useState(1)          // 1 = forward, -1 = backward
   const touchX            = useRef(null)
   const intervalRef       = useRef(null)
@@ -15,6 +16,11 @@ export function Carousel({ images, height = 400, onImageClick }) {
     intervalRef.current = setInterval(() => goTo('next'), 4200)
   }
   useEffect(() => { startTimer(); return () => clearInterval(intervalRef.current) }, [images.length])
+  useEffect(() => {
+    if (hovered) clearInterval(intervalRef.current)
+    else startTimer()
+    return () => clearInterval(intervalRef.current)
+  }, [hovered])
 
   
   const goTo = (target) => {
@@ -67,30 +73,65 @@ export function Carousel({ images, height = 400, onImageClick }) {
       style={{ position: 'relative', height, overflow: 'hidden', background: '#1a0a0e', userSelect: 'none' }}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       
       {images.map((src, i) => (
         <div
           key={i}
-          style={{ position: 'absolute', inset: 0, backfaceVisibility: 'hidden', ...slideStyle(i) }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backfaceVisibility: 'hidden',
+            background: hovered && i === cur ? '#12080b' : 'transparent',
+            ...slideStyle(i),
+          }}
+          onClick={() => onImageClick?.(src, i, images)}
         >
           <img
             src={src}
             alt={`Carousel image ${i + 1}`}
             style={{
+              position: 'absolute',
+              inset: 0,
               width: '100%',
               height: '100%',
               objectFit: 'cover',
               objectPosition: 'center top',
               display: 'block',
+              transition: 'transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease',
+              transform: hovered && i === cur ? 'scale(1.06)' : 'scale(1)',
+              opacity: hovered && i === cur ? 0.32 : 1,
+              pointerEvents: 'none',
               cursor: onImageClick ? 'zoom-in' : 'default',
             }}
-            onClick={() => onImageClick?.(src, i, images)}
+          />
+          <img
+            src={src}
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain',
+              objectPosition: 'center center',
+              display: 'block',
+              transition: 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease',
+              transform: hovered && i === cur ? 'scale(1)' : 'scale(1.18)',
+              opacity: hovered && i === cur ? 1 : 0,
+              pointerEvents: 'none',
+            }}
           />
           
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.32) 100%)',
+            background: hovered && i === cur
+              ? 'radial-gradient(ellipse at center, transparent 54%, rgba(0,0,0,0.18) 100%)'
+              : 'radial-gradient(ellipse at center, transparent 38%, rgba(0,0,0,0.32) 100%)',
+            transition: 'background 0.45s ease',
             pointerEvents: 'none',
           }} />
         </div>
